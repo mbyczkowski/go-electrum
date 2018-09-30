@@ -54,6 +54,10 @@ func NewSSLTransport(addr string, config *tls.Config) (*TCPTransport, error) {
 	return t, nil
 }
 
+func (t *TCPTransport) Address() string {
+	return t.conn.RemoteAddr().String()
+}
+
 func (t *TCPTransport) SendMessage(body []byte) error {
 	if DebugMode {
 		log.Printf("%s <- %s", t.conn.RemoteAddr(), body)
